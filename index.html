@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taquion - Beyond Next. Beyond Future.</title>
+    <style>
+        /* Base Styles & Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;700&display=swap');
+        
+        :root {
+            --purple: #8b5cf6;
+            --bright-purple: #a855f7;
+            --white: #ffffff;
+            --pink: #ec4899;
+            --blue: #3b82f6;
+            --black: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--black);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 4rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section {
+            padding: 80px 20px;
+            border: 4px solid var(--black);
+            margin-bottom: 20px;
+            animation: fadeIn 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Neobrutalism Effects */
+        .card, .btn, .input-group {
+            border: 4px solid var(--black);
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        /* Hero Section */
+        #hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--bright-purple) 100%);
+        }
+        
+        .hero-text {
+            z-index: 10;
+        }
+
+        .hero-title {
+            animation: slideInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            color: var(--white);
+            text-shadow: 
+                3px 3px 0 var(--black),
+                -3px -3px 0 var(--black),
+                3px -3px 0 var(--black),
+                -3px 3px 0 var(--black);
+            position: relative;
+        }
+
+        .hero-slogan {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--white);
+            text-shadow: 2px 2px 0 var(--black);
+            animation: slideInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            animation-delay: 0.2s;
+        }
+        
+        @keyframes slideInUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .block {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border: 4px solid var(--white);
+            animation: blockAnimate 15s infinite linear;
+            transition: transform 0.3s ease-out;
+        }
+        .block:nth-child(1) { top: 10%; left: 15%; width: 100px; height: 100px; transform: rotate(15deg); }
+        .block:nth-child(2) { bottom: 20%; right: 10%; width: 150px; height: 150px; transform: rotate(-30deg); animation-delay: 3s; }
+        .block:nth-child(3) { top: 50%; right: 5%; width: 80px; height: 80px; transform: rotate(45deg); animation-delay: 6s; }
+        .block:nth-child(4) { bottom: 5%; left: 25%; width: 200px; height: 200px; transform: rotate(60deg); animation-delay: 9s; }
+        
+        @keyframes blockAnimate {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+
+        /* Products Section */
+        #products {
+            background-color: var(--pink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            padding: 20px;
+            box-shadow: 8px 8px 0px var(--black);
+            transform: translateY(0);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 0px var(--black);
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Join Us Section */
+        #join-us {
+            background-color: var(--blue);
+            text-align: center;
+        }
+
+        .join-btn {
+            background-color: var(--purple);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            padding: 15px 30px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 6px 6px 0px var(--black);
+            transform: scale(1);
+        }
+        
+        .join-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--bright-purple);
+        }
+        
+        /* Modal Popup */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--bright-purple);
+            margin: 10% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            border: 4px solid var(--black);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 10px 10px 0px var(--black);
+        }
+
+        .close-btn {
+            color: var(--white);
+            font-size: 30px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-form input, .modal-form textarea, .modal-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid var(--black);
+            background-color: var(--white);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .modal-form button {
+            background-color: var(--purple);
+            color: var(--white);
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        
+        .modal-form button:hover {
+            transform: scale(1.02);
+            background-color: var(--blue);
+        }
+        
+        /* Newsletter Section */
+        #newsletter {
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .newsletter-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-bar input {
+            padding: 15px;
+            border: 4px solid var(--black);
+            background-color: var(--white);
+        }
+
+        .newsletter-btn {
+            background-color: var(--purple);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            padding: 15px 30px;
+            cursor: pointer;
+            box-shadow: 6px 6px 0px var(--black);
+        }
+
+        .newsletter-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--bright-purple);
+        }
+
+        /* Our Team Section */
+        #team {
+            background-color: var(--blue);
+        }
+
+        .team-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .team-card {
+            background-color: var(--white);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 8px 8px 0px var(--black);
+            border: 4px solid var(--black);
+            transform: scale(1);
+        }
+
+        .team-card:hover {
+            transform: scale(1.05);
+            border-color: var(--pink);
+        }
+
+        .team-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        #footer {
+            background-color: var(--purple);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--white);
+            border: 4px solid var(--black);
+        }
+
+        #footer p {
+            font-weight: 700;
+        }
+
+        /* Media Queries for smaller screens */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 40px 10px;
+            }
+            .newsletter-bar {
+                flex-direction: column;
+            }
+            .newsletter-bar input, .newsletter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="hero">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="hero-text">
+            <h1 class="hero-title">TAQUION</h1>
+            <p class="hero-slogan">Beyond Next. Beyond Future.</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section id="products" class="section">
+            <h2 class="animate-on-scroll">PRODUCTS</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>DROPLETS</h3>
+                    <p>Smart water monitoring and saving device.</p>
+                </div>
+                <div class="product-card">
+                    <h3>SETU (coming soon)</h3>
+                    <p>Where giving meets needs, a platform.</p>
+                </div>
+                <div class="product-card">
+                    <h3>More projects coming soon</h3>
+                    <p>We're always building something new to create a better world.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <section id="join-us" class="section">
+            <h2 class="animate-on-scroll">JOIN US</h2>
+            <p style="margin-bottom: 20px; color: var(--white);">Join the movement. We're looking for passionate people to help us build the future.</p>
+            <button id="join-btn" class="join-btn">JOIN US</button>
+        </section>
+    </div>
+
+    <div id="join-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 style="color: var(--white); text-align: center;">APPLY NOW</h2>
+            <form id="contact-form" class="modal-form" action="https://formsubmit.co/palrishabh783@gmail.com" method="POST">
+                <input type="hidden" name="_next" value="https://taquion.tech/thanks.html">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="emaiFwhel" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Tell us about yourself and why you want to join Taquion." required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="container">
+        <section id="newsletter" class="section">
+            <h2 class="animate-on-scroll">NEWSLETTER</h2>
+            <p style="margin-bottom: 20px;">Stay up to date on our projects and progress.</p>
+            <form class="newsletter-bar" action="https://formsubmit.co/palrishabh783@gmail.com" method="POST">
+                <input type="hidden" name="_next" value="https://taquion.tech/thanks.html">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="New Newsletter Signup!">
+                <input type="email" name="email" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">SIGN UP</button>
+            </form>
+        </section>
+    </div>
+
+    <div class="container">
+        <section id="team" class="section">
+            <h2 class="animate-on-scroll">OUR TEAM</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <h3>RASMITA PAL</h3>
+                    <p>Founder</p>
+                </div>
+                <div class="team-card">
+                    <h3>RAMKRISHNA PAL</h3>
+                    <p>President</p>
+                </div>
+                <div class="team-card">
+                    <h3>RISHITA PAL</h3>
+                    <p>CEO</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <footer id="footer">
+            <p>TAQUION registered and coded with passion by Rishabh Pal.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Modal logic
+        const modal = document.getElementById("join-modal");
+        const btn = document.getElementById("join-btn");
+        const span = document.getElementsByClassName("close-btn")[0];
+
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        
+        // Fade-in on scroll animation
+        const sections = document.querySelectorAll('.section');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.animation = 'none'; /* Prevents re-animation */
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Interactive blocks
+        const blocks = document.querySelectorAll('.block');
+        const hero = document.getElementById('hero');
+
+        hero.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            blocks.forEach(block => {
+                const rect = block.getBoundingClientRect();
+                const blockCenterX = rect.left + rect.width / 2;
+                const blockCenterY = rect.top + rect.height / 2;
+
+                // Calculate distance between mouse and block center
+                const deltaX = mouseX - blockCenterX;
+                const deltaY = mouseY - blockCenterY;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                if (distance < 200) { // Reaction radius
+                    // Calculate repulsion force (stronger when closer)
+                    const force = (1 - distance / 200) * 100;
+                    
+                    // Calculate repulsion direction
+                    const angle = Math.atan2(deltaY, deltaX);
+                    const moveX = -Math.cos(angle) * force;
+                    const moveY = -Math.sin(angle) * force;
+
+                    // Apply transform with both rotation and translation
+                    const currentRotation = block.style.transform.match(/rotate\(([^)]+)\)/) || ['', '0deg'];
+                    block.style.transform = `translate(${moveX}px, ${moveY}px) ${currentRotation[0]}`;
+                } else {
+                    // Reset position if mouse is far away
+                    block.style.transform = block.style.transform.replace(/translate\([^)]+\) /, '');
+                }
+            });
+        });
+
+        // Reset blocks position when mouse leaves hero section
+        hero.addEventListener('mouseleave', () => {
+            blocks.forEach(block => {
+                block.style.transform = block.style.transform.replace(/translate\([^)]+\) /, '');
+            });
+        });
+    </script>
+</body>
+</html>
