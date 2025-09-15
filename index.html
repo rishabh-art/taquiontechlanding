@@ -164,6 +164,10 @@
             padding: 20px;
             box-shadow: 8px 8px 0px var(--black);
             transform: translateY(0);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .product-card:hover {
@@ -174,6 +178,24 @@
         .product-card h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
+        }
+
+        .product-logo {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+            background-color: var(--white);
+            padding: 10px;
+            border: 4px solid var(--black);
+            box-shadow: 4px 4px 0px var(--black);
+        }
+
+        .product-card:hover .product-logo {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 6px 6px 0px var(--black);
         }
         
         /* Join Us Section */
@@ -330,6 +352,131 @@
             margin-bottom: 5px;
         }
         
+        /* Contact Section */
+        #contact {
+            background-color: var(--purple);
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .contact-btn {
+            background-color: var(--white);
+            color: var(--purple);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            padding: 15px 30px;
+            cursor: pointer;
+            border: 4px solid var(--black);
+            box-shadow: 6px 6px 0px var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .email-popup {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bright-purple);
+            padding: 20px;
+            border: 4px solid var(--black);
+            border-radius: 10px;
+            box-shadow: 10px 10px 0px var(--black);
+            z-index: 1000;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .contact-wrapper {
+            display: inline-block;
+            position: relative;
+        }
+
+        .email-popup.show {
+            display: block;
+        }
+
+        .email-popup.hidden {
+            display: none !important;
+        }
+
+        .email-action-btn, .email-close-btn {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .email-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--white);
+            color: var(--bright-purple);
+            border: 2px solid var(--black);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .email-close-btn:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 8px 8px 0px var(--black);
+        }
+
+        .email-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .email-action-btn {
+            background-color: var(--white);
+            color: var(--bright-purple);
+            padding: 15px;
+            border: 4px solid var(--black);
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .email-action-btn:hover {
+            transform: scale(1.02);
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        .copy-message {
+            color: var(--white);
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .copy-message.show {
+            opacity: 1;
+        }
+
         /* Footer */
         #footer {
             background-color: var(--purple);
@@ -380,10 +527,12 @@
             <h2 class="animate-on-scroll">PRODUCTS</h2>
             <div class="product-grid">
                 <div class="product-card">
+                    <img src="dropletsLOGO.png" alt="Droplets Logo" class="product-logo">
                     <h3>DROPLETS</h3>
                     <p>Smart water monitoring and saving device.</p>
                 </div>
                 <div class="product-card">
+                    <img src="setuLOGO.jpg" alt="Setu Logo" class="product-logo">
                     <h3>SETU (coming soon)</h3>
                     <p>Where giving meets needs, a platform.</p>
                 </div>
@@ -407,8 +556,8 @@
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h2 style="color: var(--white); text-align: center;">APPLY NOW</h2>
-            <form id="contact-form" class="modal-form" action="https://formsubmit.co/palrishabh783@gmail.com" method="POST">
-                <input type="hidden" name="_next" value="https://taquion.tech/thanks.html">
+            <form id="contact-form" class="modal-form" action="https://formsubmit.co/6d79e85254f220adece3092241ddb540" method="POST">
+                <input type="hidden" name="_next" value="https://www.taquion.tech/thanks.html">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="text" name="name" placeholder="Name" required>
                 <input type="emaiFwhel" name="email" placeholder="Email" required>
@@ -422,8 +571,8 @@
         <section id="newsletter" class="section">
             <h2 class="animate-on-scroll">NEWSLETTER</h2>
             <p style="margin-bottom: 20px;">Stay up to date on our projects and progress.</p>
-            <form class="newsletter-bar" action="https://formsubmit.co/palrishabh783@gmail.com" method="POST">
-                <input type="hidden" name="_next" value="https://taquion.tech/thanks.html">
+            <form class="newsletter-bar" action="https://formsubmit.co/6d79e85254f220adece3092241ddb540" method="POST">
+                <input type="hidden" name="_next" value="https://www.taquion.tech/thanks.html">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" value="New Newsletter Signup!">
                 <input type="email" name="email" placeholder="Enter your email address" required>
@@ -447,6 +596,30 @@
                 <div class="team-card">
                     <h3>RISHITA PAL</h3>
                     <p>CEO</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container">
+        <section id="contact" class="section">
+            <h2 class="animate-on-scroll">CONTACT US</h2>
+            <p style="margin-bottom: 20px;">Have questions? We'd love to hear from you.</p>
+            <div class="contact-wrapper">
+                <button id="contact-btn" class="contact-btn">contact@taquion.tech</button>
+                <div id="email-popup" class="email-popup">
+                    <div class="email-actions">
+                        <button id="copy-email" class="email-action-btn">
+                            COPY EMAIL
+                        </button>
+                        <a href="mailto:contact@taquion.tech" class="email-action-btn">
+                            SEND EMAIL
+                        </a>
+                        <button id="close-popup" class="email-action-btn">
+                            CLOSE
+                        </button>
+                    </div>
+                    <div id="copy-message" class="copy-message">Email copied!</div>
                 </div>
             </div>
         </section>
@@ -542,6 +715,36 @@
         hero.addEventListener('mouseleave', () => {
             blocks.forEach(block => {
                 block.style.transform = block.style.transform.replace(/translate\([^)]+\) /, '');
+            });
+        });
+
+        // Email popup functionality
+        const copyEmailBtn = document.getElementById("copy-email");
+        const copyMessage = document.getElementById("copy-message");
+        const closePopupBtn = document.getElementById("close-popup");
+        const emailPopup = document.getElementById("email-popup");
+        const contactBtn = document.getElementById("contact-btn");
+
+        // Show popup when contact button is clicked
+        contactBtn.addEventListener('click', function() {
+            emailPopup.classList.add('show');
+            emailPopup.classList.remove('hidden');
+        });
+
+        // Close popup when close button is clicked
+        closePopupBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            emailPopup.classList.remove('show');
+        });
+
+        // Copy email functionality
+        copyEmailBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigator.clipboard.writeText("contact@taquion.tech").then(() => {
+                copyMessage.classList.add("show");
+                setTimeout(() => {
+                    copyMessage.classList.remove("show");
+                }, 2000);
             });
         });
     </script>
