@@ -168,6 +168,13 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-card.clickable {
+            cursor: pointer;
         }
 
         .product-card:hover {
@@ -175,9 +182,65 @@
             box-shadow: 12px 12px 0px var(--black);
         }
 
+        .arrow-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: var(--purple);
+            border: 3px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translate(10px, -10px);
+            transition: all 0.3s ease;
+        }
+
+        .arrow-icon::before {
+            content: '↗';
+            color: var(--white);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .product-card:hover .arrow-icon {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
         .product-card h3 {
             font-size: 1.5rem;
             margin-bottom: 10px;
+        }
+
+        .inquire-link {
+            margin-top: 15px;
+            color: var(--purple);
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+        }
+
+        .inquire-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--purple);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        .inquire-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
 
         .product-logo {
@@ -524,17 +587,20 @@
     
     <div class="container">
         <section id="products" class="section">
-            <h2 class="animate-on-scroll">PRODUCTS</h2>
+            <h2 class="animate-on-scroll">PROJECTS</h2>
             <div class="product-grid">
-                <div class="product-card">
+                <a href="https://droplets.taquion.tech" target="_blank" class="product-card clickable">
+                    <div class="arrow-icon"></div>
                     <img src="dropletsLOGO.png" alt="Droplets Logo" class="product-logo">
                     <h3>DROPLETS</h3>
                     <p>Smart water monitoring and saving device.</p>
-                </div>
+                    <div class="inquire-link" onclick="copyProjectEmail('DROPLETS')">Inquire about project</div>
+                </a>
                 <div class="product-card">
                     <img src="setuLOGO.jpg" alt="Setu Logo" class="product-logo">
                     <h3>SETU (coming soon)</h3>
                     <p>Where giving meets needs, a platform.</p>
+                    <div class="inquire-link" onclick="copyProjectEmail('SETU')">Inquire about project</div>
                 </div>
                 <div class="product-card">
                     <h3>More projects coming soon</h3>
@@ -590,7 +656,7 @@
                     <p>Founder</p>
                 </div>
                 <div class="team-card">
-                    <h3>RAMKRISHNA PAL</h3>
+                    <h3>RISHABH PAL</h3>
                     <p>President</p>
                 </div>
                 <div class="team-card">
@@ -673,6 +739,45 @@
         sections.forEach(section => {
             observer.observe(section);
         });
+
+        // Project inquiry functionality
+        function copyProjectEmail(project) {
+            const email = 'contact@taquion.tech';
+            const subject = `Inquiry about ${project} project`;
+            const mailtoLink = `${email}?subject=${encodeURIComponent(subject)}`;
+            
+            navigator.clipboard.writeText(email).then(() => {
+                // Create or get notification element
+                let notification = document.getElementById('copy-notification');
+                if (!notification) {
+                    notification = document.createElement('div');
+                    notification.id = 'copy-notification';
+                    notification.style.position = 'fixed';
+                    notification.style.bottom = '20px';
+                    notification.style.left = '50%';
+                    notification.style.transform = 'translateX(-50%)';
+                    notification.style.backgroundColor = 'var(--purple)';
+                    notification.style.color = 'var(--white)';
+                    notification.style.padding = '10px 20px';
+                    notification.style.borderRadius = '5px';
+                    notification.style.border = '2px solid var(--black)';
+                    notification.style.fontWeight = 'bold';
+                    notification.style.zIndex = '1000';
+                    document.body.appendChild(notification);
+                }
+                
+                notification.textContent = 'Email copied!';
+                notification.style.display = 'block';
+                notification.style.opacity = '1';
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 300);
+                }, 2000);
+            });
+        }
 
         // Interactive blocks
         const blocks = document.querySelectorAll('.block');
